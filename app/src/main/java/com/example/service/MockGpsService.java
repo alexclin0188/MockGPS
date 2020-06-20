@@ -33,6 +33,7 @@ import com.example.mockgps.R;
 import org.apache.log4j.Logger;
 
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 public class MockGpsService extends Service {
@@ -92,9 +93,11 @@ public class MockGpsService extends Service {
         handlerThread.start();
 
         handler = new Handler(handlerThread.getLooper()) {
+            private Random random = new Random();
             public void handleMessage(Message msg) {
                 try {
-                    Thread.sleep(128);
+//                    Thread.sleep(128);
+                    Thread.sleep(64+random.nextInt(64));
                     if (!isStop) {
 
                         //remove default network location provider
